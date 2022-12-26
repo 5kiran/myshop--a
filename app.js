@@ -22,11 +22,15 @@ io.on("connection", (sock) => {
 
   // io.emit으로 데이터를 전달
   io.emit("BUY_GOODS", {
-    nickname: '서버가 보내준 구매자 닉네임',
+    nickname: "서버가 보내준 구매자 닉네임",
     goodsId: 10, // 서버가 보내준 상품 데이터 고유 ID
-    goodsName: '서버가 보내준 구매자가 구매한 상품 이름',
-    date: '서버가 보내준 구매 일시'
-  })
+    goodsName: "서버가 보내준 구매자가 구매한 상품 이름",
+    date: "서버가 보내준 구매 일시",
+  });
+
+  sock.on("BUY", (data) => {
+    console.log(data);
+  });
 
   sock.on("disconnect", () => {
     console.log(sock.id, "해당하는 사용자 연결 해제");
