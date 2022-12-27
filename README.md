@@ -6,6 +6,8 @@
 ```
 .
 ├── app.js
+├── server.js
+├── socket.js
 ├── routes
 │   ├── user.js
 │   ├── goods.js
