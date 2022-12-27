@@ -20,16 +20,15 @@ app.use(express.static("assets"));
 io.on("connection", (sock) => {
   console.log("새로운 소켓 연결");
 
-  // io.emit으로 데이터를 전달
-  io.emit("BUY_GOODS", {
-    nickname: "서버가 보내준 구매자 닉네임",
-    goodsId: 10, // 서버가 보내준 상품 데이터 고유 ID
-    goodsName: "서버가 보내준 구매자가 구매한 상품 이름",
-    date: "서버가 보내준 구매 일시",
-  });
-
   sock.on("BUY", (data) => {
-    console.log(data);
+    const emitData = {
+      nickname: data.nickname,
+      goodsId: data.goodsId,
+      goodsName: data.goodsName,
+      date: new Date().toISOString(),
+    };
+
+    io.emit("BUY_GOODS", emitData);
   });
 
   sock.on("disconnect", () => {
